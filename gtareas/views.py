@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import *
-from django.db.models import Q
+from django.db.models import Q,Count
 from django.db.models import Avg,Max,Min
 # Create your views here.
 def index(request):
@@ -36,3 +36,15 @@ def ultimo_usuario_comentario(request, tarea_id):
     ultimo_comentario = Comentario.objects.filter(tarea_id=tarea_id).order_by('-fecha_contenido').first()
     usuario = ultimo_comentario.autor 
     return render(request, 'gtareas/ultimo_comentario.html', {'usuario': usuario})
+def obtener_comentarios(request, palabra, anio):
+    comentarios = Comentario.objects.filter(
+        contenido__startswith=palabra,   
+        fecha_contenido__year=anio)
+    return render(request, 'gtareas/lista_comentarios.html', {'comentarios': comentarios})
+def obtener_etiquetas_proyecto(request, proyecto_id):
+    proyecto = Proyecto.objects.prefetch_related('tareas__tareas_asociadas').get(id=proyecto_id) #porque esta en la tabla de tareas y lo otro porque esta fuera 
+    return render(request, 'gtareas/lista_etiquetas_proyecto.html', {'proyecto': proyecto})
+def usuarios_sin_tareas(request):
+    #usuarios_libres = Usuario.objects.annotate(tareas_count=Count('tarea')).filter(tareas_count=0) #annotate lo que hace es añadir un campo nuevo
+    usuarios_libres = Usuario.objects.filter(tarea=None)
+    return render(request, 'gtareas/usuarios_libres.html', {'usuarios': usuarios_libres})

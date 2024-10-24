@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Comentarios</title>
+</head>
+<body>
+    <h1>Comentarios filtrados</h1>
+    <ul>
+        {% for comentario in comentarios %}
+            <li>{{ comentario.autor.nombre }}: {{ comentario.contenido }} ({{ comentario.fecha_contenido }})</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
