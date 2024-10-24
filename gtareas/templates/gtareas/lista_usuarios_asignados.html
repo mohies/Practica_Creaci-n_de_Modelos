@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios Asignados</title>
+</head>
+<body>
+    <h1>Usuarios asignados a la tarea de {{ tarea.titulo }}</h1>
+    
+    <ul>
+        {% for usuario in asignaciones %}
+            <li>{{usuario.nombre }}</li>
+            <li>{{usuario.correo_electronico}}</li>
+            <li>{{usuario.fecha_registro}}
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'index' %}">Volver al inicio</a>
+</body>
+</html>

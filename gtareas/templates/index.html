@@ -4,9 +4,17 @@
             <h1>GESTOR DE TAREAS</h1>
 
             <h2>Listado de enlaces</h2>
-          
+            
             <ul>
-       
+               <li> <a href="{% url 'lista_proyectos' %}">Ver la lista de proyectos</a></li>
+                <li><a href="{% url 'lista_tareas_proyecto' 1 %}">Listar tareas por proyecto</a></li>
+                <li><a href="{% url 'lista_usuarios_asignados' 5 %}">Ver usuarios asignados para la tarea 5</a></li>
+                <li><a href="{% url 'lista_tareas_por_observacion' 'Station' %}">Búsqueda con palabra 'Station'</a></li>
+                <li><a href="{% url 'dame_tareas_por_anio' 2021 2024 %}">Ver Tareas Completadas de 2021 a 2024</a></li>
+                <li><a href="{% url 'ultimo_usuario_comentario' 1 %}">Último usuario que comentó en la tarea 1</a></li>
             </ul>
+          
+
+            
         </body>
 </html>

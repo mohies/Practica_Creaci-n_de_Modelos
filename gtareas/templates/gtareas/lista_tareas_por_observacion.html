@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tareas por Observación</title>
+</head>
+<body>
+    <h1>Tareas que contienen el texto {{ texto }}</h1>
+    
+
+        <ul>
+            {% for asignacion in asignaciones %}
+                <li>
+                    <strong>Tarea:</strong> {{ asignacion.tarea.titulo }} <br>
+                    <strong>Observaciones:</strong> {{ asignacion.observaciones }}
+                </li>
+            {% endfor %}
+        </ul>
+
+    
+    <a href="{% url 'index' %}">Volver al inicio</a>
+</body>
+</html>

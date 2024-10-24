@@ -1,0 +1,19 @@
+<!-- prueba/tareas_completadas.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tareas Completadas entre Años</title>
+</head>
+<body>
+    <h1>Tareas Completadas</h1>
+    <ul>
+        {% for tarea in tareas_mostrar %}
+            <li>
+                Título: {{ tarea.titulo }} - Fecha de Creación: {{ tarea.fecha_creacion }} - Estado: {{ tarea.estado }}
+            </li>
+
+        {%endfor%}
+    </ul>
+</body>
+</html>
