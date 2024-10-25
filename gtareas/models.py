@@ -11,21 +11,7 @@ class Usuario(models.Model):
     def __str__(self):
         return self.nombre
     
-class Tarea(models.Model):
-    ESTADOS = [('Pen','Pendiente'), ('Prog','Progreso'), ('Com','Completada')]
-    titulo = models.CharField(max_length=200)
-    descripcion = models.TextField()
-    prioridad = models.IntegerField()
-    estado = models.CharField(max_length=10, choices=ESTADOS,default="Pendiente")
-    completada = models.BooleanField(default=False)
-    fecha_creacion = models.DateField(default=timezone.now)
-    hora_vencimiento = models.TimeField()
-    
-    creador = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    usuario=models.ManyToManyField(Usuario,related_name="usuario",through='AsignacionTarea')
-    
-    def __str__(self):
-        return self.titulo
+
 
 
 class Proyecto(models.Model):
@@ -37,9 +23,25 @@ class Proyecto(models.Model):
 
     colaboradores = models.ManyToManyField(Usuario, related_name='proyectos_asignados')
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)  
-    tareas = models.ManyToManyField(Tarea, related_name='proyectos')  
+    
     def __str__(self):
         return self.nombre
+    
+class Tarea(models.Model):
+    ESTADOS = [('Pen','Pendiente'), ('Prog','Progreso'), ('Com','Completada')]
+    titulo = models.CharField(max_length=200)
+    descripcion = models.TextField()
+    prioridad = models.IntegerField()
+    estado = models.CharField(max_length=10, choices=ESTADOS,default="Pendiente")
+    completada = models.BooleanField(default=False)
+    fecha_creacion = models.DateField(default=timezone.now)
+    hora_vencimiento = models.TimeField()
+    
+    creador = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True)
+    usuario=models.ManyToManyField(Usuario,related_name="usuario",through='AsignacionTarea')
+    proyecto=models.ForeignKey(Proyecto,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.titulo
     
     
 class Etiqueta(models.Model):

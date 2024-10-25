@@ -32,8 +32,8 @@ def dame_tareas_por_anio(request, anio_inicial, anio_final):
     )
     return render(request, 'gtareas/tareas_completadas.html', {"tareas_mostrar": tareas})
 
-def ultimo_usuario_comentario(request, tarea_id):
-    ultimo_comentario = Usuario.objects.filter(tarea__id=tarea_id).order_by('-fecha_registro').get()
+def ultimo_usuario_comentario(request, proyecto_id):
+    ultimo_comentario = Usuario.objects.filter(comentario__tarea__proyecto=proyecto_id).order_by('-comentario__fecha_contenido')[:1].get()
     return render(request, 'gtareas/ultimo_comentario.html', {'usuario': ultimo_comentario})
 
 def obtener_comentarios(request, palabra, anio):
