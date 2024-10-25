@@ -33,18 +33,21 @@ def dame_tareas_por_anio(request, anio_inicial, anio_final):
     return render(request, 'gtareas/tareas_completadas.html', {"tareas_mostrar": tareas})
 
 def ultimo_usuario_comentario(request, tarea_id):
-    ultimo_comentario = Comentario.objects.filter(tarea_id=tarea_id).order_by('-fecha_contenido').first()
-    usuario = ultimo_comentario.autor 
-    return render(request, 'gtareas/ultimo_comentario.html', {'usuario': usuario})
+    ultimo_comentario = Usuario.objects.filter(tarea__id=tarea_id).order_by('-fecha_registro').get()
+    return render(request, 'gtareas/ultimo_comentario.html', {'usuario': ultimo_comentario})
+
 def obtener_comentarios(request, palabra, anio):
     comentarios = Comentario.objects.filter(
         contenido__startswith=palabra,   
         fecha_contenido__year=anio)
     return render(request, 'gtareas/lista_comentarios.html', {'comentarios': comentarios})
-def obtener_etiquetas_proyecto(request, proyecto_id):
-    proyecto = Proyecto.objects.prefetch_related('tareas__tareas_asociadas').get(id=proyecto_id) #porque esta en la tabla de tareas y lo otro porque esta fuera 
-    return render(request, 'gtareas/lista_etiquetas_proyecto.html', {'proyecto': proyecto})
+def obtener_etiquetas_proyecto(request, proyecto_id): #el selected related se suele poner para optimizar y tambien por si quiero acceder a todas las tareas por ejemplo que esten relaciondas
+    etiqueta = Etiqueta.objects.filter(tareas__proyectos__id=proyecto_id) #porque esta en la tabla de tareas y lo otro porque esta fuera  y al no poner get se puedee usra for y luego esta el .all() y el get()
+    return render(request, 'gtareas/lista_etiquetas_proyecto.html', {'etiquetas': etiqueta})
 def usuarios_sin_tareas(request):
     #usuarios_libres = Usuario.objects.annotate(tareas_count=Count('tarea')).filter(tareas_count=0) #annotate lo que hace es añadir un campo nuevo
     usuarios_libres = Usuario.objects.filter(tarea=None)
     return render(request, 'gtareas/usuarios_libres.html', {'usuarios': usuarios_libres})
+
+def mi_error_404(request, exception=None):
+    return render(request, 'gtareas/errores/404.html', None,None,404)

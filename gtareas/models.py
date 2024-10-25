@@ -21,7 +21,8 @@ class Tarea(models.Model):
     fecha_creacion = models.DateField(default=timezone.now)
     hora_vencimiento = models.TimeField()
     
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    creador = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    usuario=models.ManyToManyField(Usuario,related_name="usuario",through='AsignacionTarea')
     
     def __str__(self):
         return self.titulo
@@ -43,7 +44,7 @@ class Proyecto(models.Model):
     
 class Etiqueta(models.Model):
     nombre = models.TextField(max_length=200, unique=True)
-    etiquetas = models.ManyToManyField(Tarea, related_name='tareas_asociadas')
+    tareas = models.ManyToManyField(Tarea, related_name='tareas_asociadas')
     def __str__(self):
         return self.nombre
     
