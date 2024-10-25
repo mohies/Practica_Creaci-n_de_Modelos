@@ -11,12 +11,12 @@ def lista_proyectos(request):
     return render(request, 'gtareas/lista_proyectos.html', {'gtareas': gtareas})
 
 def lista_tareas_proyecto(request, proyecto_id):
-    proyecto = Proyecto.objects.prefetch_related('tareas').get(id=proyecto_id)
-    tareas = proyecto.tareas.all().order_by('-fecha_creacion')
+    proyecto = Proyecto.objects.get(id=proyecto_id)  # Recupera el proyecto sin prefetch_related
+    tareas = Tarea.objects.filter(proyecto=proyecto).order_by('-fecha_creacion')  # Filtra tareas relacionadas con el proyecto
     return render(request, 'gtareas/lista_tareas_proyecto.html', {'tareas': tareas})
 
 def lista_usuarios_asignados(request, tarea_id):
-    asignaciones = Usuario.objects.filter(asignaciontarea__tarea=tarea_id).order_by('asignaciontarea__fecha_asignacion')
+    asignaciones = Usuario.objects.filter(asignaciontarea__tarea__id=tarea_id).order_by('asignaciontarea__fecha_asignacion')
     return render(request, 'gtareas/lista_usuarios_asignados.html', { 'asignaciones': asignaciones})
 
 def lista_tareas_por_observacion(request, texto):
@@ -42,7 +42,7 @@ def obtener_comentarios(request, palabra, anio):
         fecha_contenido__year=anio)
     return render(request, 'gtareas/lista_comentarios.html', {'comentarios': comentarios})
 def obtener_etiquetas_proyecto(request, proyecto_id): #el selected related se suele poner para optimizar y tambien por si quiero acceder a todas las tareas por ejemplo que esten relaciondas
-    etiqueta = Etiqueta.objects.filter(tareas__proyectos__id=proyecto_id) #porque esta en la tabla de tareas y lo otro porque esta fuera  y al no poner get se puedee usra for y luego esta el .all() y el get()
+    etiqueta = Etiqueta.objects.filter(tareas__proyecto__id=proyecto_id) #porque esta en la tabla de tareas y lo otro porque esta fuera  y al no poner get se puedee usra for y luego esta el .all() y el get()
     return render(request, 'gtareas/lista_etiquetas_proyecto.html', {'etiquetas': etiqueta})
 def usuarios_sin_tareas(request):
     #usuarios_libres = Usuario.objects.annotate(tareas_count=Count('tarea')).filter(tareas_count=0) #annotate lo que hace es añadir un campo nuevo
@@ -51,3 +51,9 @@ def usuarios_sin_tareas(request):
 
 def mi_error_404(request, exception=None):
     return render(request, 'gtareas/errores/404.html', None,None,404)
+def mi_error_400(request, exception=None):
+    return render(request, 'gtareas/errores/400.html', None,None,400)
+def mi_error_403(request, exception=None):
+    return render(request, 'gtareas/errores/403.html', None,None,403)
+def mi_error_500(request, exception=None):
+    return render(request, 'gtareas/errores/403.html', None,None,500)

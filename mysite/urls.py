@@ -23,3 +23,7 @@ urlpatterns = [
     path('',include('gtareas.urls')),
     
 ]
+handler404="gtareas.views.mi_error_404"
+handler400="gtareas.views.mi_error_400"
+handler403="gtareas.views.mi_error_403"
+handler500="gtareas.views.mi_error_500"
