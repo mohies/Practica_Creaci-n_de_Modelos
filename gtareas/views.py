@@ -11,8 +11,7 @@ def lista_proyectos(request):
     return render(request, 'gtareas/lista_proyectos.html', {'gtareas': gtareas})
 
 def lista_tareas_proyecto(request, proyecto_id):
-    proyecto = Proyecto.objects.get(id=proyecto_id)  # Recupera el proyecto sin prefetch_related
-    tareas = Tarea.objects.filter(proyecto=proyecto).order_by('-fecha_creacion')  # Filtra tareas relacionadas con el proyecto
+    tareas = Tarea.objects.filter(proyecto__id=proyecto_id).order_by('-fecha_creacion') 
     return render(request, 'gtareas/lista_tareas_proyecto.html', {'tareas': tareas})
 
 def lista_usuarios_asignados(request, tarea_id):
