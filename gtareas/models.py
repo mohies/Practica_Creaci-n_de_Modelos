@@ -37,9 +37,9 @@ class Tarea(models.Model):
     fecha_creacion = models.DateField(default=timezone.now)
     hora_vencimiento = models.TimeField()
     
-    creador = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True)
+    creador = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True,related_name="creador")
     usuario=models.ManyToManyField(Usuario,related_name="usuario",through='AsignacionTarea')
-    proyecto=models.ForeignKey(Proyecto,on_delete=models.CASCADE)
+    proyecto=models.ForeignKey(Proyecto,on_delete=models.CASCADE,related_name="proyecto_tareas")
     def __str__(self):
         return self.titulo
     

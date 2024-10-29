@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from .models import *
-from django.db.models import Q,Count
+from django.db.models import Q,Count,Prefetch
 from django.db.models import Avg,Max,Min
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
 
 def lista_proyectos(request):
-    gtareas = Proyecto.objects.all()
+    gtareas = Proyecto.objects.select_related("usuario").prefetch_related("colaboradores", Prefetch("proyecto_tareas")).all() #esta es la adecuada
+    
     return render(request, 'gtareas/lista_proyectos.html', {'gtareas': gtareas})
 
 def lista_tareas_proyecto(request, proyecto_id):
@@ -35,8 +36,9 @@ def ultimo_usuario_comentario(request, proyecto_id):
     ultimo_comentario = Usuario.objects.filter(comentario__tarea__proyecto=proyecto_id).order_by('-comentario__fecha_contenido')[:1].get()
     return render(request, 'gtareas/ultimo_comentario.html', {'usuario': ultimo_comentario})
 
-def obtener_comentarios(request, palabra, anio):
+def obtener_comentarios(request, palabra, anio,tarea_id):
     comentarios = Comentario.objects.filter(
+        tarea=tarea_id,
         contenido__startswith=palabra,   
         fecha_contenido__year=anio)
     return render(request, 'gtareas/lista_comentarios.html', {'comentarios': comentarios})
