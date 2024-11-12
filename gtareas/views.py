@@ -47,7 +47,7 @@ def obtener_etiquetas_proyecto(request, proyecto_id): #el selected related se su
     return render(request, 'gtareas/lista_etiquetas_proyecto.html', {'etiquetas': etiqueta})
 def usuarios_sin_tareas(request):
     #usuarios_libres = Usuario.objects.annotate(tareas_count=Count('tarea')).filter(tareas_count=0) #annotate lo que hace es añadir un campo nuevo
-    usuarios_libres = Usuario.objects.filter(tarea=None)
+    usuarios_libres = Usuario.objects.filter(asignaciontarea=None)
     return render(request, 'gtareas/usuarios_libres.html', {'usuarios': usuarios_libres})
 
 def mi_error_404(request, exception=None):

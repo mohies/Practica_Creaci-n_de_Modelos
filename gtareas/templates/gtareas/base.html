@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas</title>
+
+    <!-- Estilos personalizados -->
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilo general */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Estilo para el contenedor del menú */
+        nav {
+            background-color: #007bff;
+            padding: 10px 20px;
+        }
+
+        nav .navbar-brand {
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        nav .navbar-nav {
+            list-style: none;
+            display: flex;
+            margin-left: auto;
+        }
+
+        nav .nav-item {
+            margin-left: 20px;
+        }
+
+        nav .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        nav .nav-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Contenedor de contenido */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Títulos */
+        h1, h2 {
+            color: #007bff;
+        }
+
+        /* Estilo de los enlaces */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        ul li a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilo del pie de página */
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menú de navegación superior -->
+    <nav>
+        <a class="navbar-brand" href="{% url 'index' %}">Gestor de Tareas</a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'lista_proyectos' %}">Proyectos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'usuarios_sin_tareas' %}">Usuarios Libres</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'lista_tareas_por_observacion' 'Every' %}">Buscar Tareas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'dame_tareas_por_anio' 2021 2024 %}">Tareas Completadas</a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div class="container mt-4">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>2024 Gestor de Tareas. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
