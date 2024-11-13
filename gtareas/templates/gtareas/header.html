@@ -1,0 +1,19 @@
+<header>
+<nav id="navegacion">
+    <a id="marcaNavegacion" href="{% url 'index' %}">Gestor de Tareas</a>
+    <ul id="listaNavegacion">
+        <li id="elementoNavegacion">
+            <a id="enlaceNavegacion" href="{% url 'lista_proyectos' %}">Proyectos</a>
+        </li>
+        <li id="elementoNavegacion">
+            <a id="enlaceNavegacion" href="{% url 'usuarios_sin_tareas' %}">Usuarios Libres</a>
+        </li>
+        <li id="elementoNavegacion">
+            <a id="enlaceNavegacion" href="{% url 'lista_tareas_por_observacion' 'Every' %}">Buscar Tareas</a>
+        </li>
+        <li id="elementoNavegacion">
+            <a id="enlaceNavegacion" href="{% url 'dame_tareas_por_anio' 2021 2024 %}">Tareas Completadas</a>
+        </li>
+    </ul>
+</nav>
+<header>
