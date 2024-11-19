@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Usuarios Libres</title>
-</head>
-<body>
+{% extends 'gtareas/base.html' %}
+
+{% block contenido %}
     <h1>Usuarios Sin Tareas Asignadas</h1>
-    <ul>
-        {% for usuario in usuarios %}
-            <li>{{ usuario.nombre }}</li>
+   {% for usuario in usuarios %}
+            <li>{{ usuario.nombre }}- Hora : {{usuario.fecha_registro|time:"H:i" }}</li>
+            
+        {% empty %}
+            <li>No hay usuarios sin tareas asignadas.</li>
         {% endfor %}
-    </ul>
     <a href="{% url 'index' %}">Volver al inicio</a>
-</body>
-</html>
+{% endblock %}

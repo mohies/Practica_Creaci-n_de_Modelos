@@ -5,7 +5,7 @@ from django.utils import timezone
 class Usuario(models.Model):
     nombre = models.CharField(max_length=200)
     correo_electronico = models.TextField(unique=True)
-    contraseña = models.TextField()  
+    contrasena = models.TextField()  
     fecha_registro = models.DateTimeField(blank=True,null=True)
 
     def __str__(self):

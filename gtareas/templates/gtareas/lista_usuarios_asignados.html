@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuarios Asignados</title>
-</head>
-<body>
-    <h1>Usuarios asignados a la tarea de {{ tarea.titulo }}</h1>
+{% extends 'gtareas/base.html' %}
+
+{% block contenido %}
+    <h1>Usuarios asignados a la tarea 5</h1>
     
-    <ul>
-        {% for usuario in asignaciones %}
-            <li>{{usuario.nombre }}</li>
-            <li>{{usuario.correo_electronico}}</li>
-            <li>{{usuario.fecha_registro}}
-        {% endfor %}
-    </ul>
+    {% if asignaciones %}
+        <ul>
+            {% for usuario in asignaciones %}
+                {% include 'gtareas/fors/usuario_item.html' %}
+            {% endfor %}
+        </ul>
+        
+    {% else %}
+        <p>No hay usuarios asignados a esta tarea.</p>
+    {% endif %}
 
     <a href="{% url 'index' %}">Volver al inicio</a>
-</body>
-</html>
+{% endblock %}

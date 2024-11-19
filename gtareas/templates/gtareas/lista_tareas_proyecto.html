@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Tareas del Proyecto</title>
-</head>
-<body>
+{% extends 'gtareas/base.html' %}
+
+{% block contenido %}
     <h1>Tareas del Proyecto</h1>
     <ul>
-        {% for tarea in tareas %}
+       {% for tarea in tareas %}
             <li>
-                <strong>{{ tarea.titulo }}</strong> - {{ tarea.fecha_creacion }} 
+                <strong>{{ tarea.titulo }}</strong> - {{ tarea.fecha_creacion|date:"d M Y" }}
                 <p>{{ tarea.descripcion }}</p>
             </li>
+        {% empty %}
+            <li>No hay tareas disponibles para este proyecto.</li>
         {% endfor %}
+
+        
+   
     </ul>
     <a href="{% url 'lista_proyectos' %}">Volver a la lista de proyectos</a>
-</body>
-</html>
+{% endblock %}

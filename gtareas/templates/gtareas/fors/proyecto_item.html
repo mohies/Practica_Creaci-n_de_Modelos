@@ -1,0 +1,15 @@
+<li>
+    <h2>Proyecto con id {{ proyecto.id }}</h2>
+    <strong>Nombre:</strong> {{ proyecto.nombre }}<br>
+    <strong>Descripción:</strong> {{ proyecto.descripcion }}<br>
+    <strong>Duración Estimada:</strong> {{ proyecto.duracion_estimada }}<br>
+    <strong>Fecha de Inicio:</strong> {{ proyecto.fecha_inicio }}<br>
+    <strong>Fecha de Finalización:</strong> {{ proyecto.fecha_finalizacion }}<br>
+
+
+    {% if proyecto.fecha_inicio and proyecto.fecha_finalizacion %}
+        <p><strong>Ambas fechas están definidas correctamente.</strong></p>
+    {% else %}
+        <p>El proyecto tiene alguna fecha sin definir.</p>
+    {% endif %}
+</li>

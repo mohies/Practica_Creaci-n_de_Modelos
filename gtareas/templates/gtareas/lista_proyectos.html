@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Lista de Proyectos</title>
-</head>
-<body>
+{% extends 'gtareas/base.html' %}
+
+{% block contenido %}
     <h1>Lista de Proyectos</h1>
     <ul>
         {% for proyecto in gtareas %}
-            <li>
-                <h1>Proyecto con id {{proyecto.id}}</h1>
-                <strong>Nombre:</strong> {{ proyecto.nombre }}<br>
-                <strong>Descripción:</strong> {{ proyecto.descripcion }}<br>
-                <strong>Duración Estimada:</strong> {{ proyecto.duracion_estimada }}<br>
-                <strong>Fecha de Inicio:</strong> {{ proyecto.fecha_inicio }}<br>
-                <strong>Fecha de Finalización:</strong> {{ proyecto.fecha_finalizacion }}<br>
-            </li>
+            {% include 'gtareas/fors/proyecto_item.html' %}
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}

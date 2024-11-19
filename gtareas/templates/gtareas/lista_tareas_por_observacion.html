@@ -1,23 +1,27 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Tareas por Observación</title>
-</head>
-<body>
-    <h1>Tareas que contienen el texto {{ texto }}</h1>
-    
+{% extends 'gtareas/base.html' %}
 
-        <ul>
-            {% for asignacion in asignaciones %}
-                <li>
-                    <strong>Tarea:</strong> {{ asignacion.tarea.titulo }} <br>
-                    <strong>Observaciones:</strong> {{ asignacion.observaciones }}
-                </li>
-            {% endfor %}
-        </ul>
+{% block contenido %}
+    <h1>Tareas que contienen el texto "Every"</h1>
 
-    
+    <ul>
+        {% for asignacion in asignaciones %}
+            {% if 'Every' in asignacion.tarea.titulo %}
+                {% if asignacion.tarea.titulo|length > 5 %}
+                    {% include 'gtareas/fors/asignacion_item.html' %}
+                {% else %}
+                    <p>El título es demasiado corto para mostrarlo.</p>
+                {% endif %}
+            {% elif 'Every' in asignacion.observaciones %}
+                {% if asignacion.observaciones|length > 5 %}
+                    {% include 'gtareas/fors/asignacion_item.html' %}
+                {% else %}
+                    <p>La observación es demasiado corta para mostrarla.</p>
+                {% endif %}
+            {% else %}
+                <p>No hay asignaciones con el texto "Every".</p>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
     <a href="{% url 'index' %}">Volver al inicio</a>
-</body>
-</html>
+{% endblock %}

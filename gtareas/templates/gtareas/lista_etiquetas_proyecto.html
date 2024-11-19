@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Etiquetas del Proyecto</title>
-</head>
-<body>
+{% extends 'gtareas/base.html' %}
+
+{% block contenido %}
     <h1>Etiquetas utilizadas</h1>
     <ul>
         {% for etiqueta in etiquetas %}
-            <li>{{ etiqueta.nombre }}</li>
-  
+            {% include 'gtareas/fors/etiqueta_item.html' %}
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}

@@ -1,0 +1,11 @@
+<li>
+    <strong>Nombre:</strong> {{ usuario.nombre }}<br>
+    <strong>Correo electrónico:</strong> {{ usuario.correo_electronico|upper }}<br>
+    <strong>Fecha de registro:</strong> {{ usuario.fecha_registro.year|add:5 }}<br>
+
+    {% if usuario.fecha_registro.year > 2000 %}
+        <p>Registro reciente (después del año 2000).</p>
+    {% else %}
+        <p>Registro antiguo (antes o en el año 2000).</p>
+    {% endif %}
+</li>

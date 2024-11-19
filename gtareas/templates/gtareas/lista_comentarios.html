@@ -1,15 +1,24 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Comentarios</title>
-</head>
-<body>
+{% extends 'gtareas/base.html' %}
+
+{% block contenido %}
     <h1>Comentarios filtrados</h1>
     <ul>
         {% for comentario in comentarios %}
-            <li>{{ comentario.autor.nombre }}: {{ comentario.contenido }} ({{ comentario.fecha_contenido }})</li>
+            {% with comentario.autor.nombre as autor_nombre %}
+                <li>
+                    {{ autor_nombre }}: {{ comentario.contenido|lower }} ({{ comentario.fecha_contenido }}) 
+
+    
+                    {% if comentario.contenido and autor_nombre %}
+                        <p>El autor y el contenido existen.</p>
+                    {% else %}
+                        <p>Faltan datos en el comentario o el autor.</p>
+                    {% endif %}
+
+                </li>
+            {% endwith %}
+        {% empty %}
+            <p>No hay comentarios disponibles.</p>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}

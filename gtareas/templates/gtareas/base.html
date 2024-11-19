@@ -1,105 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block cabecera %}Gestor de Tareas{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
-    <!-- Estilos personalizados -->
-    <style>
-        /* Reset básico */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Estilo general */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-
-        /* Estilo para el contenedor del menú */
-        #navegacion {
-            background-color: #007bff;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        #marcaNavegacion {
-            color: white;
-            font-size: 24px;
-            text-decoration: none;
-        }
-
-        #listaNavegacion {
-            list-style: none;
-            display: flex;
-            margin-left: auto;
-        }
-
-        #elementoNavegacion {
-            margin-left: 20px;
-        }
-
-        #enlaceNavegacion {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-        }
-
-        #enlaceNavegacion:hover {
-            text-decoration: underline;
-        }
-
-        /* Contenedor de contenido */
-        #contenedor {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-        /* Títulos */
-        h1, h2 {
-            color: #007bff;
-        }
-
-        /* Estilo de los enlaces */
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        ul li {
-            margin-bottom: 10px;
-        }
-
-        ul li a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        ul li a:hover {
-            text-decoration: underline;
-        }
-
-        /* Estilo del pie de página */
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-    </style>
 </head>
 <body>
 
@@ -113,7 +20,13 @@
         {% endblock %}
     </div>
 
+    <!-- Imagen logo -->
+    <img src="{% static 'imagenes/logo.png' %}" alt="Logo">
+
+    <!-- Pie de página -->
     {% include 'gtareas/footer.html' %}
+
+    <script src="{% static 'javascript/script.js' %}"></script>
 
 </body>
 </html>
