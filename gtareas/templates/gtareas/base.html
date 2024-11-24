@@ -10,20 +10,20 @@
 </head>
 <body>
 
-    <!-- Menú de navegación superior -->
+
     {% include 'gtareas/header.html' %}
 
-    <!-- Contenedor de contenido principal -->
+  
     <div id="contenedor">
         {% block contenido %}
         
         {% endblock %}
     </div>
 
-    <!-- Imagen logo -->
+
     <img src="{% static 'imagenes/logo.png' %}" alt="Logo">
 
-    <!-- Pie de página -->
+
     {% include 'gtareas/footer.html' %}
 
     <script src="{% static 'javascript/script.js' %}"></script>

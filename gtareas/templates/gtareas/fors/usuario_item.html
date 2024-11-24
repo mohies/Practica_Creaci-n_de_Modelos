@@ -5,7 +5,8 @@
 
     {% if usuario.fecha_registro.year > 2000 %}
         <p>Registro reciente (después del año 2000).</p>
-    {% else %}
+    {% endif %}
+    {% if usuario.fecha_registro.year < 2000 %}
         <p>Registro antiguo (antes o en el año 2000).</p>
     {% endif %}
 </li>
